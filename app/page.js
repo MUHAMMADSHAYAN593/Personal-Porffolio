@@ -50,102 +50,151 @@ useEffect(() => {
 
 
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <>
+      {/* Hero + About Section */}
+      <section className="min-h-screen flex flex-col lg:flex-row items-center justify-center px-6 py-12 bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
+        <div className="lg:w-1/2 text-center lg:text-left">
+          <h1 className="text-4xl sm:text-5xl font-bold mb-4">
+            Hi, I’m{" "}
+            <span className="text-blue-600 dark:text-blue-400">
+              <span ref={el}></span>
+            </span>
+          </h1>
+          <p className="text-lg sm:text-xl mb-6 max-w-2xl leading-relaxed">
+            I’m a passionate <span className="font-semibold text-blue-600 dark:text-blue-400">Artificial Intelligence student </span>
+            and full-stack developer skilled in
+            <span className="font-semibold"> Java, C, HTML, CSS, JavaScript, Node.js, Express.js, React, and Next.js</span>.
+            My expertise includes building responsive and visually appealing interfaces,
+            developing backend systems, working with <span className="font-semibold">MySQL databases</span>,
+            integrating APIs, and leveraging <span className="font-semibold">AI tools</span> to create innovative solutions.
+            I thrive on solving complex problems, learning new technologies,
+            and delivering user-focused, high-quality software.
+          </p>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
           <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="/projects"
+            className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
+            View My Work
           </a>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+
+        <div className="lg:w-1/2 mt-8 lg:mt-0 flex justify-center">
+          <img
+            src="https://www.creative-tim.com/twcomponents/svg/website-designer-bro-purple.svg"
+            alt="Developer Illustration"
+            className="w-full max-w-md"
           />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+        </div>
+      </section>
+
+      {/* Skills Section */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold mb-8">My Skills</h2>
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8">
+
+            <div className="flex flex-col items-center">
+              <FaJava className="text-5xl text-orange-600" />
+              <span className="mt-2">Java</span>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <FaHtml5 className="text-5xl text-orange-500" />
+              <span className="mt-2">HTML</span>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <FaCss3Alt className="text-5xl text-blue-500" />
+              <span className="mt-2">CSS</span>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <FaJs className="text-5xl text-yellow-400" />
+              <span className="mt-2">JavaScript</span>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <SiMysql className="text-5xl text-blue-700" />
+              <span className="mt-2">MySQL</span>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <FaCloud className="text-5xl text-indigo-500" />
+              <span className="mt-2">APIs & Cloud</span>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <SiOpenai className="text-5xl text-purple-500" />
+              <span className="mt-2">AI Tools</span>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <SiC className="text-5xl text-gray-500" />
+              <span className="mt-2">C</span>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <FaNodeJs className="text-5xl text-green-600" />
+              <span className="mt-2">Node.js</span>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <SiExpress className="text-5xl text-gray-700 dark:text-gray-300" />
+              <span className="mt-2">Express.js</span>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <FaReact className="text-5xl text-cyan-400" />
+              <span className="mt-2">React</span>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <SiNextdotjs className="text-5xl text-black dark:text-white" />
+              <span className="mt-2">Next.js</span>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+
+      <section className="py-16 bg-gray-50 dark:bg-gray-800 text-gray-900 dark:text-white">
+      <div className="max-w-6xl mx-auto px-6 text-center">
+        <h2 className="text-3xl font-bold mb-12">My Top Projects</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {blogs.map((blog, index) => (
+            <div
+              key={index}
+              className="bg-white dark:bg-gray-900 shadow-md rounded-lg overflow-hidden flex flex-col transition-transform hover:scale-105"
+            >
+              <img
+                src={blog.image}
+                alt={blog.title}
+                className="w-full h-48 object-cover"
+              />
+              <div className="p-6 flex flex-col flex-grow">
+                <h3 className="text-xl font-semibold mb-3">{blog.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 flex-grow">
+                  {blog.description}
+                </p>
+                <div className="mt-4 text-white">
+                  <Link href={blog.link}>
+                    <Button variant="default" className="w-full text-white">
+                      Read More
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+
+      {/* Footer */}
+      <Footer />
+    </>
   );
 }
