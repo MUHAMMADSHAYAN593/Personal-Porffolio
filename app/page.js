@@ -1,10 +1,10 @@
 "use client"
 
-import Footer from "@/components/footer";
+import Footer from "/components/footer";
 import { FaJava, FaHtml5, FaCss3Alt, FaJs, FaCloud, FaNodeJs, FaReact } from "react-icons/fa";
 import { SiMysql, SiOpenai, SiC, SiExpress, SiNextdotjs } from "react-icons/si";
 import Link from "next/link";
-import { Button } from "@/components/ui/button"
+import { Button } from "/components/ui/button"
 import Typed from 'typed.js';
 import React , {useEffect , useRef} from "react";
 export default function Home() {
