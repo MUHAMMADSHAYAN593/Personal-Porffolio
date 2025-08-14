@@ -1,6 +1,54 @@
-import Image from "next/image";
+"use client"
 
+import Footer from "@/components/footer";
+import { FaJava, FaHtml5, FaCss3Alt, FaJs, FaCloud, FaNodeJs, FaReact } from "react-icons/fa";
+import { SiMysql, SiOpenai, SiC, SiExpress, SiNextdotjs } from "react-icons/si";
+import Link from "next/link";
+import { Button } from "@/components/ui/button"
+import Typed from 'typed.js';
+import React , {useEffect , useRef} from "react";
 export default function Home() {
+  const blogs = [
+  {
+    title: "Twitter Clone",
+    description:
+      "A responsive Twitter-like social media UI built with HTML, CSS, and JavaScript, featuring tweets, likes, and profile sections. Deployed on GitHub Pages.",
+    image: "./images/Twitter.avif",
+    link: "/projects",
+  },
+  {
+    title: "Todo List App",
+    description:
+      "A fully functional Todo List app made with React.js, featuring task creation, completion toggling, deletion, and persistence in localStorage.",
+    image: "./images/Todo.png",
+    link: "/projects",
+  },
+  {
+    title: "Voice Command Chatbot",
+    description:
+      "A React and JavaScript-based chatbot with voice command support, using the Web Speech API for speech recognition and text-to-speech responses.",
+    image: "./images/Voice.jpeg",
+    link: "/projects",
+  },
+];
+
+  const el = useRef(null);
+
+useEffect(() => {
+  // Only run if ref exists
+  if (!el.current) return;
+
+  const typed = new Typed(el.current, {
+    strings: ['Muhammad Shayan'],
+    typeSpeed: 50,
+  });
+
+  return () => {
+    typed.destroy();
+  };
+}, []);
+
+
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
