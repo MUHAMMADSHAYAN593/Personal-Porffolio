@@ -15,7 +15,7 @@ const blogs = [
     image: "./images/Spotify.png",
   },
   {
-    slug: "/",
+    slug: "/personal-portfolio",
     title: "Personal Portfolio Website",
     description: "A responsive portfolio website built with Next.js...",
     image: "./images/next.jpeg",

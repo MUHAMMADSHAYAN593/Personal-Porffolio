@@ -5,6 +5,34 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 
+// ✅ Generate all slugs at build time
+export async function generateStaticParams() {
+  const files = fs.readdirSync(path.join(process.cwd(), "content"));
+
+  return files
+    .filter((file) => file.endsWith(".md"))
+    .map((file) => ({
+      slug: file.replace(".md", ""),
+    }));
+}
+
+// ✅ (Optional) Generate SEO metadata per project
+export async function generateMetadata({ params }) {
+  const filePath = path.join(process.cwd(), "content", `${params.slug}.md`);
+
+  if (!fs.existsSync(filePath)) {
+    return { title: "Project Not Found" };
+  }
+
+  const fileContent = fs.readFileSync(filePath, "utf-8");
+  const { data } = matter(fileContent);
+
+  return {
+    title: data?.title || "Project",
+    description: data?.description || "Project details",
+  };
+}
+
 export default function SingleProject({ params }) {
   const { slug } = params;
   const filePath = path.join(process.cwd(), "content", `${slug}.md`);
@@ -39,7 +67,7 @@ export default function SingleProject({ params }) {
                     'code[class*="language-"]': {
                       ...oneDark['code[class*="language-"]'],
                       background: "transparent",
-                    }
+                    },
                   }}
                   language={match[1]}
                   PreTag="div"

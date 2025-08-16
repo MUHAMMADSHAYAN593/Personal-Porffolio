@@ -43,6 +43,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
+/* 🌞 Light Mode */
 :root {
   --radius: 0.65rem;
   --background: oklch(1 0 0);
@@ -76,8 +77,11 @@
   --sidebar-accent-foreground: oklch(0.21 0.006 285.885);
   --sidebar-border: oklch(0.92 0.004 286.32);
   --sidebar-ring: oklch(0.623 0.214 259.815);
+
+  --code-bg: #f3f4f6;
 }
 
+/* 🌙 Dark Mode */
 .dark {
   --background: oklch(0.141 0.005 285.823);
   --foreground: oklch(0.985 0 0);
@@ -110,21 +114,81 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.488 0.243 264.376);
-}
-:root {
-  --code-bg: #f3f4f6; /* light gray for light mode */
-}
 
-.dark {
-  --code-bg: #1f2937; /* dark gray for dark mode */
+  --code-bg: #1f2937;
 }
 
-
+/* Base reset */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Typography overrides 🚀 */
+@layer components {
+  .prose {
+    color: var(--foreground);
+  }
+
+  .prose h1,
+  .prose h2,
+  .prose h3,
+  .prose h4 {
+    color: var(--foreground);
+    font-weight: 700;
+  }
+
+  .prose strong {
+    color: var(--primary);
+  }
+
+  .prose a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  .prose code {
+    background-color: var(--code-bg);
+    color: var(--primary);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.3rem;
+    font-size: 0.9rem;
+  }
+
+  .prose blockquote {
+    border-left: 4px solid var(--primary);
+    background-color: var(--muted);
+    color: var(--foreground);
+    font-style: italic;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+  }
+
+  .prose hr {
+    border-color: var(--border);
+  }
+
+  .prose ul > li::marker {
+    color: var(--primary);
+  }
+
+  /* Dark mode */
+  .dark .prose {
+    color: var(--foreground);
+  }
+
+  .dark .prose code {
+    background-color: var(--code-bg);
+    color: var(--primary);
+  }
+
+  .dark .prose blockquote {
+    background-color: var(--muted);
+    color: var(--foreground);
   }
 }
