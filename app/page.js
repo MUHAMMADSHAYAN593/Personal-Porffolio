@@ -71,12 +71,12 @@ useEffect(() => {
             and delivering user-focused, high-quality software.
           </p>
 
-          <a
+          <Link
             href="/projects"
             className="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 transition-colors"
           >
             View My Work
-          </a>
+          </Link>
         </div>
 
         <div className="lg:w-1/2 mt-8 lg:mt-0 flex justify-center">
