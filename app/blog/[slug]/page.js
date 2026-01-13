@@ -1,84 +1,71 @@
-import fs from "fs";
-import path from "path";
-import matter from "gray-matter";
-import ReactMarkdown from "react-markdown";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { oneDark } from "react-syntax-highlighter/dist/esm/styles/prism";
+import Link from "next/link";
+import { ArrowLeft, Clock, Calendar, User } from "lucide-react";
+import { blogs } from "@/app/data/blogs";
+import { notFound } from "next/navigation";
 
-// ✅ Tell Next.js all possible slugs at build time
 export async function generateStaticParams() {
-    const blogsDir = path.join(process.cwd(), "content", "blogs");
-    const files = fs.readdirSync(blogsDir);
-
-    return files.map((file) => ({
-        slug: file.replace(/\.md$/, ""), // remove .md extension
+    return blogs.map((post) => ({
+        slug: post.slug,
     }));
 }
 
-export default function SingleBlog({ params }) {
-    const { slug } = params;
-    const filePath = path.join(process.cwd(), "content", "blogs", `${slug}.md`);
+export default function BlogPost({ params }) {
+    const post = blogs.find((b) => b.slug === params.slug);
 
-    if (!fs.existsSync(filePath)) {
-        return <p className="text-center py-10">Blog not found</p>;
+    if (!post) {
+        notFound();
     }
 
-    const fileContent = fs.readFileSync(filePath, "utf-8");
-    const { data, content } = matter(fileContent);
-
     return (
-        <div className="max-w-4xl mx-auto px-4 py-10">
-            {/* Blog Title */}
-            <h1 className="text-4xl font-bold mb-2">{data.title}</h1>
-            {data.excerpt && (
-                <p className="text-lg text-gray-500 mb-8">{data.excerpt}</p>
-            )}
-
-            {/* Blog Content */}
-            <article className="prose prose-lg dark:prose-invert max-w-none">
-
-                <ReactMarkdown
-                    components={{
-                        code({ inline, className, children, ...props }) {
-                            const match = /language-(\w+)/.exec(className || "");
-                            return !inline && match ? (
-                                <SyntaxHighlighter
-                                    style={{
-                                        ...oneDark,
-                                        'pre[class*="language-"]': {
-                                            ...oneDark['pre[class*="language-"]'],
-                                            background: "var(--code-bg)",
-                                            padding: "1rem",
-                                            borderRadius: "0.5rem",
-                                            lineHeight: "1.6",
-                                            fontSize: "0.95rem",
-                                            boxShadow: "0 2px 6px rgba(0,0,0,0.1)",
-                                        },
-                                        'code[class*="language-"]': {
-                                            ...oneDark['code[class*="language-"]'],
-                                            background: "transparent",
-                                        },
-                                    }}
-                                    language={match[1]}
-                                    PreTag="div"
-                                    {...props}
-                                >
-                                    {String(children).replace(/\n$/, "")}
-                                </SyntaxHighlighter>
-                            ) : (
-                                <code
-                                    className="bg-gray-200 dark:bg-gray-800 px-1 py-0.5 rounded"
-                                    {...props}
-                                >
-                                    {children}
-                                </code>
-                            );
-                        },
-                    }}
+        <article className="min-h-screen bg-white dark:bg-gray-950 py-16 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-3xl mx-auto">
+                {/* Back Link */}
+                <Link
+                    href="/blog"
+                    className="inline-flex items-center text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors mb-8 group"
                 >
-                    {content}
-                </ReactMarkdown>
-            </article>
-        </div>
+                    <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+                    Back to Blogs
+                </Link>
+
+                {/* Header */}
+                <header className="mb-10 text-center">
+                    <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 leading-tight">
+                        {post.title}
+                    </h1>
+
+                    <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600 dark:text-gray-400 border-b border-gray-100 dark:border-gray-800 pb-8">
+                        <div className="flex items-center gap-2">
+                            <Calendar className="w-4 h-4 text-blue-500" />
+                            <span>{post.date}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <Clock className="w-4 h-4 text-green-500" />
+                            <span>{post.readTime}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                            <User className="w-4 h-4 text-purple-500" />
+                            <span>{post.author}</span>
+                        </div>
+                    </div>
+                </header>
+
+                {/* Content */}
+                <div className="prose prose-lg prose-blue dark:prose-invert max-w-none">
+                    {post.content}
+                </div>
+
+                {/* Footer Navigation */}
+                <div className="mt-16 pt-8 border-t border-gray-100 dark:border-gray-800">
+                    <Link
+                        href="/blog"
+                        className="inline-flex items-center font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+                    >
+                        <ArrowLeft className="w-4 h-4 mr-2" />
+                        Read more articles
+                    </Link>
+                </div>
+            </div>
+        </article>
     );
 }

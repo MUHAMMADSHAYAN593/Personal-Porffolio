@@ -1,139 +1,133 @@
 "use client";
 
-import { useState , useEffect } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { ModeToggle } from "@/components/theme-btn";
-import { FaHome, FaUser, FaEnvelope, FaBlog , FaRProject } from "react-icons/fa";
-import LoadingBar, { useLoadingBar } from "react-top-loading-bar";
+import { FaHome, FaUser, FaEnvelope, FaBlog, FaProjectDiagram } from "react-icons/fa";
+import LoadingBar from "react-top-loading-bar";
 import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
-  const [progress, setprogress] = useState(0)
-  const pathname = usePathname()
-
-  useEffect(() => {
-    setprogress(30)
-
-    setTimeout(() => {
-      setprogress(70)
-    }, 100);
-
-    setTimeout(() => {
-      setprogress(100)
-    }, 400);
-  }, [pathname])
-
-  useEffect(() => {
-    setTimeout(() => {
-      setprogress(0)
-    }, 500);
-  }, [])
-  
-  
-
+  const [progress, setProgress] = useState(0);
+  const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Handle Loading Bar
+  useEffect(() => {
+    setProgress(30);
+    setTimeout(() => setProgress(70), 100);
+    setTimeout(() => setProgress(100), 400);
+  }, [pathname]);
+
+  useEffect(() => {
+    setTimeout(() => setProgress(0), 500);
+  }, []);
+
+  // Handle Scroll Effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const navLinks = [
     { name: "Home", path: "/", icon: <FaHome /> },
     { name: "About", path: "/about", icon: <FaUser /> },
-    { name: "Contact", path: "/contact", icon: <FaEnvelope /> },
+    { name: "Projects", path: "/projects", icon: <FaProjectDiagram /> },
     { name: "Blog", path: "/blog", icon: <FaBlog /> },
-    { name: "Projects", path: "/projects", icon: <FaRProject /> },
+    { name: "Contact", path: "/contact", icon: <FaEnvelope /> },
   ];
 
   return (
-    <nav className="w-full bg-white/70 dark:bg-gray-900/70 border-b border-gray-200 dark:border-gray-700 shadow-sm sticky top-0 z-50 text-gray-900 dark:text-white backdrop-blur-lg">
+    <>
       <LoadingBar
-        color="blue"
+        color="#9333ea" // Purple-600 to match theme
         progress={progress}
-        onLoaderFinished={() => setprogress(0)}
+        onLoaderFinished={() => setProgress(0)}
+        height={3}
       />
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16 items-center">
-          
-          {/* Logo */}
-          <div className="flex-shrink-0 flex items-center">
-            <Link href="/" className="flex items-center gap-1">
-              <span className="text-xl font-bold text-gray-800 dark:text-white">
-                Shayan<span className="text-blue-600">Blog</span>
-              </span>
-              <span className="w-2 h-2 bg-blue-600 rounded-full"></span>
-            </Link>
-          </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.path}
-                className="relative text-gray-700 dark:text-gray-300 hover:text-blue-600 font-medium transition group"
-              >
-                {link.name}
-                <span className="absolute left-0 -bottom-1 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
-              </Link>
-            ))}
-            <ModeToggle />
-          </div>
-
-          {/* Mobile Menu Toggle */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            type="button"
-            className="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg md:hidden 
-                       hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 
-                       dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-          >
-            <span className="sr-only">Open sidebar</span>
-            <svg
-              className="w-6 h-6"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                clipRule="evenodd"
-                fillRule="evenodd"
-                d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"
-              ></path>
-            </svg>
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Sidebar */}
-      <aside
-        className={`fixed top-0 left-0 z-40 w-56 h-screen transition-transform duration-300 
-        ${isOpen ? "translate-x-0" : "-translate-x-full"} bg-gray-50 dark:bg-gray-800 md:hidden`}
+      <nav
+        className={`fixed w-full z-50 transition-all duration-300 ${scrolled || isOpen
+            ? "bg-white/80 dark:bg-gray-950/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 shadow-sm"
+            : "bg-transparent border-b border-transparent"
+          }`}
       >
-        {/* Header */}
-        <div className="flex justify-between items-center px-4 py-3 border-b border-gray-200 dark:border-gray-700">
-          <span className="text-lg font-semibold text-blue-600">Menu</span>
-          <button onClick={() => setIsOpen(false)} className="text-gray-500 dark:text-gray-400">
-            ✕
-          </button>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+
+            {/* Logo */}
+            <div className="flex-shrink-0 flex items-center">
+              <Link href="/" className="flex items-center gap-2 group">
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-purple-600 flex items-center justify-center text-white font-bold text-lg shadow-lg group-hover:shadow-blue-500/50 transition-all duration-300">
+                  S
+                </div>
+                <span className="text-xl font-bold text-gray-900 dark:text-white tracking-tight">
+                  Shayan<span className="text-purple-600">.dev</span>
+                </span>
+              </Link>
+            </div>
+
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center space-x-8">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  href={link.path}
+                  className={`relative text-sm font-medium transition-colors duration-300 ${pathname === link.path
+                      ? "text-purple-600 dark:text-purple-400"
+                      : "text-gray-600 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400"
+                    }`}
+                >
+                  {link.name}
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-purple-600 transition-all duration-300 ${pathname === link.path ? "w-full" : "w-0 hover:w-full"}`}></span>
+                </Link>
+              ))}
+              <div className="pl-4 border-l border-gray-200 dark:border-gray-700">
+                <ModeToggle />
+              </div>
+            </div>
+
+            {/* Mobile Actions */}
+            <div className="flex items-center gap-4 md:hidden">
+              <ModeToggle />
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                type="button"
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 dark:text-gray-200 hover:text-purple-600 dark:hover:text-purple-400 focus:outline-none transition-colors"
+                aria-controls="mobile-menu"
+                aria-expanded="false"
+              >
+                <span className="sr-only">Open main menu</span>
+                {isOpen ? <X className="block h-6 w-6" /> : <Menu className="block h-6 w-6" />}
+              </button>
+            </div>
+          </div>
         </div>
 
-        {/* Links */}
-        <ul className="space-y-2 p-4">
+        {/* Mobile Menu Overlay */}
+        <div
+          className={`fixed inset-0 z-40 bg-white/95 dark:bg-gray-950/95 backdrop-blur-xl transition-transform duration-300 ease-in-out md:hidden flex flex-col items-center justify-center space-y-8 ${isOpen ? "translate-x-0" : "translate-x-full"
+            }`}
+        >
           {navLinks.map((link) => (
-            <li key={link.name}>
-              <Link
-                href={link.path}
-                className="flex items-center gap-3 px-3 py-2 rounded-md text-gray-900 dark:text-white 
-                           hover:bg-blue-100 dark:hover:bg-blue-600 hover:text-blue-700 dark:hover:text-white transition"
-                onClick={() => setIsOpen(false)}
-              >
-                <span className="text-lg">{link.icon}</span>
-                {link.name}
-              </Link>
-            </li>
+            <Link
+              key={link.name}
+              href={link.path}
+              onClick={() => setIsOpen(false)}
+              className="flex items-center gap-3 text-2xl font-bold text-gray-900 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 transition-transform hover:scale-110"
+            >
+              <span className="text-purple-600">{link.icon}</span>
+              {link.name}
+            </Link>
           ))}
-          <li className="mt-4">
-            <ModeToggle />
-          </li>
-        </ul>
-      </aside>
-    </nav>
+        </div>
+      </nav>
+    </>
   );
 };
 
