@@ -1,57 +1,45 @@
 "use client";
 
 import * as React from "react";
-import { FaMoon, FaSun } from "react-icons/fa";
+import { Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
 
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-
 export function ModeToggle() {
-  const { theme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
-  // Only render theme UI after client has mounted
   React.useEffect(() => {
     setMounted(true);
   }, []);
 
+  const toggleTheme = () => {
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  };
+
+  if (!mounted) {
+    return (
+      <button
+        aria-label="Toggle theme"
+        className="w-8 h-8 rounded border border-[var(--border)] flex items-center justify-center text-[var(--muted-foreground)] opacity-0 pointer-events-none"
+      >
+        <Sun className="w-3.5 h-3.5" />
+      </button>
+    );
+  }
+
+  const isDark = resolvedTheme === "dark";
+
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button
-          onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-          className="
-            p-2 rounded-md
-            bg-gray-200 text-gray-900
-            hover:bg-gray-300
-            dark:bg-gray-700 dark:text-gray-100
-            dark:hover:bg-gray-600
-            transition-colors
-          "
-        >
-          {mounted ? (
-            theme === "dark" ? <FaSun size={18} /> : <FaMoon size={18} />
-          ) : (
-            <FaSun size={18} className="opacity-0" /> // invisible placeholder to avoid mismatch
-          )}
-        </button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <button
+      onClick={toggleTheme}
+      aria-label={isDark ? "Switch to light theme" : "Switch to dark theme"}
+      className="w-8 h-8 rounded border border-[var(--border)] bg-[var(--card)] hover:bg-[var(--surface-subtle)] text-[var(--foreground)] flex items-center justify-center transition-colors focus-visible:ring-1 focus-visible:ring-[var(--ring)]"
+    >
+      {isDark ? (
+        <Sun className="w-3.5 h-3.5 text-amber-400 transition-transform" />
+      ) : (
+        <Moon className="w-3.5 h-3.5 text-[var(--foreground)] transition-transform" />
+      )}
+    </button>
   );
 }

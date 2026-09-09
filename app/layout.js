@@ -1,4 +1,3 @@
-// app/layout.js
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
@@ -15,27 +14,46 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "My Portfolio",
-  description: "Showcasing my projects and blogs",
+  title: "Muhammad Shayan | AI/ML & Full-Stack Developer",
+  description:
+    "AI/ML student and full-stack developer focused on building practical AI systems, machine-learning applications, and modern web products.",
+  keywords: [
+    "Muhammad Shayan",
+    "AI Developer",
+    "Machine Learning",
+    "Full-Stack Developer",
+    "React",
+    "Next.js",
+    "Python",
+    "Karachi",
+  ],
+  authors: [{ name: "Muhammad Shayan" }],
+  openGraph: {
+    title: "Muhammad Shayan | AI/ML & Full-Stack Developer",
+    description:
+      "AI/ML student and full-stack developer building intelligent systems, data products, and modern web experiences.",
+    url: "https://shayan.dev",
+    siteName: "Muhammad Shayan Portfolio",
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased 
-          bg-white text-black dark:bg-gray-900 dark:text-gray-100 
-          transition-colors duration-300`}
+        suppressHydrationWarning
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange
-          // forcedTheme="dark" // Uncomment to always force dark mode
         >
           <Navbar />
-          {children}
+          <div className="flex-1">{children}</div>
         </ThemeProvider>
       </body>
     </html>

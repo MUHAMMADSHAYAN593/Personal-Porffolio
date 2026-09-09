@@ -1,71 +1,108 @@
 import Link from "next/link";
-import { ArrowLeft, Clock, Calendar, User } from "lucide-react";
-import { blogs } from "@/app/data/blogs";
 import { notFound } from "next/navigation";
+import Footer from "@/components/footer";
+import { blogs } from "@/app/data/blogs";
+import { ArrowLeft, Clock, Calendar, User } from "lucide-react";
 
 export async function generateStaticParams() {
-    return blogs.map((post) => ({
-        slug: post.slug,
-    }));
+  return blogs.map((post) => ({
+    slug: post.slug,
+  }));
 }
 
-export default function BlogPost({ params }) {
-    const post = blogs.find((b) => b.slug === params.slug);
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+  const post = blogs.find((b) => b.slug === slug);
 
-    if (!post) {
-        notFound();
-    }
+  if (!post) {
+    return { title: "Article Not Found | Muhammad Shayan" };
+  }
 
-    return (
-        <article className="min-h-screen bg-white dark:bg-gray-950 py-16 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mx-auto">
-                {/* Back Link */}
-                <Link
-                    href="/blog"
-                    className="inline-flex items-center text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors mb-8 group"
-                >
-                    <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                    Back to Blogs
-                </Link>
+  return {
+    title: `${post.title} | Muhammad Shayan`,
+    description: post.excerpt,
+  };
+}
 
-                {/* Header */}
-                <header className="mb-10 text-center">
-                    <h1 className="text-3xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-6 leading-tight">
-                        {post.title}
-                    </h1>
+export default async function BlogPost({ params }) {
+  const { slug } = await params;
+  const post = blogs.find((b) => b.slug === slug);
 
-                    <div className="flex flex-wrap justify-center items-center gap-6 text-sm text-gray-600 dark:text-gray-400 border-b border-gray-100 dark:border-gray-800 pb-8">
-                        <div className="flex items-center gap-2">
-                            <Calendar className="w-4 h-4 text-blue-500" />
-                            <span>{post.date}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <Clock className="w-4 h-4 text-green-500" />
-                            <span>{post.readTime}</span>
-                        </div>
-                        <div className="flex items-center gap-2">
-                            <User className="w-4 h-4 text-purple-500" />
-                            <span>{post.author}</span>
-                        </div>
-                    </div>
-                </header>
+  if (!post) {
+    notFound();
+  }
 
-                {/* Content */}
-                <div className="prose prose-lg prose-blue dark:prose-invert max-w-none">
-                    {post.content}
-                </div>
+  return (
+    <main className="min-h-screen pt-12 md:pt-16">
+      <div className="editorial-container">
+        {/* Back Link */}
+        <div className="mb-10">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-xs font-mono text-[var(--muted-foreground)] hover:text-[var(--foreground)] transition-colors group"
+          >
+            <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
+            Back to Writing
+          </Link>
+        </div>
 
-                {/* Footer Navigation */}
-                <div className="mt-16 pt-8 border-t border-gray-100 dark:border-gray-800">
-                    <Link
-                        href="/blog"
-                        className="inline-flex items-center font-semibold text-blue-600 dark:text-blue-400 hover:underline"
-                    >
-                        <ArrowLeft className="w-4 h-4 mr-2" />
-                        Read more articles
-                    </Link>
-                </div>
-            </div>
+        {/* Article Header */}
+        <header className="pb-8 border-b border-[var(--border)] mb-10 max-w-3xl">
+          <div className="flex flex-wrap items-center gap-4 text-xs font-mono text-[var(--muted-foreground)] mb-4">
+            <span className="inline-flex items-center gap-1.5">
+              <Calendar className="w-3.5 h-3.5 text-blue-500" />
+              {post.date}
+            </span>
+            <span>•</span>
+            <span className="inline-flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-emerald-500" />
+              {post.readTime}
+            </span>
+            <span>•</span>
+            <span className="inline-flex items-center gap-1.5">
+              <User className="w-3.5 h-3.5 text-[var(--muted-foreground)]" />
+              {post.author}
+            </span>
+          </div>
+
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-[var(--foreground)] mb-6 leading-tight">
+            {post.title}
+          </h1>
+
+          <p className="text-base md:text-lg text-[var(--muted-foreground)] leading-relaxed mb-6">
+            {post.excerpt}
+          </p>
+
+          <div className="flex flex-wrap gap-1.5">
+            {post.tags?.map((tag) => (
+              <span
+                key={tag}
+                className="text-[11px] font-mono px-2 py-0.5 rounded bg-[var(--surface-subtle)] text-[var(--foreground)] border border-[var(--border)]"
+              >
+                {tag}
+              </span>
+            ))}
+          </div>
+        </header>
+
+        {/* Article Content */}
+        <article className="max-w-3xl prose prose-neutral dark:prose-invert text-[var(--foreground)] prose-headings:font-bold prose-headings:tracking-tight prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-h3:text-lg prose-p:text-base prose-p:leading-relaxed prose-p:text-[var(--muted-foreground)] prose-li:text-base prose-li:text-[var(--muted-foreground)] prose-code:font-mono prose-code:text-xs prose-code:bg-[var(--surface-subtle)] prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded">
+          {post.content}
         </article>
-    );
+
+        {/* Bottom Link */}
+        <div className="mt-16 pt-8 border-t border-[var(--border)] max-w-3xl">
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-xs font-mono font-semibold text-blue-600 dark:text-blue-400 hover:underline"
+          >
+            <ArrowLeft className="w-3.5 h-3.5" />
+            Explore all articles
+          </Link>
+        </div>
+      </div>
+
+      <Footer />
+    </main>
+  );
 }

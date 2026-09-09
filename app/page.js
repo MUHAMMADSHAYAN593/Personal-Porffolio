@@ -1,180 +1,519 @@
-"use client";
-
-import Footer from "/components/footer";
 import Link from "next/link";
-import { Button } from "/components/ui/button";
-import Typed from 'typed.js';
-import React, { useEffect, useRef } from "react";
-import { FaJava, FaHtml5, FaCss3Alt, FaJs, FaCloud, FaNodeJs, FaReact, FaGithub, FaLinkedin } from "react-icons/fa";
-import { SiMysql, SiOpenai, SiC, SiExpress, SiNextdotjs, SiTailwindcss, SiTypescript } from "react-icons/si";
-import { ArrowRight, Download, Mail } from "lucide-react";
+import Footer from "@/components/footer";
+import ProjectCard from "@/components/project-card";
+import CodeSnippetBox from "@/components/code-snippet-box";
+import GitHubActivity from "@/components/github-activity";
+import { getFeaturedProjects, projects } from "@/app/data/projects";
+import { blogs } from "@/app/data/blogs";
+import { ArrowRight, ArrowUpRight, Mail } from "lucide-react";
 
 export default function Home() {
-  const el = useRef(null);
+  const featuredProjects = getFeaturedProjects();
+  const archivePreview = projects.filter((p) => !p.featured).slice(0, 4);
+  const recentArticles = blogs.slice(0, 3);
 
-  useEffect(() => {
-    if (!el.current) return;
-    const typed = new Typed(el.current, {
-      strings: ['Full Stack Developer', 'AI Enthusiast', 'Problem Solver'],
-      typeSpeed: 50,
-      backSpeed: 30,
-      loop: true,
-      backDelay: 1500,
-    });
-    return () => typed.destroy();
-  }, []);
+  const skills = {
+    languages: ["Python", "JavaScript", "C++", "Java", "SQL"],
+    aiml: ["NumPy", "Pandas", "Scikit-learn", "Data Analysis", "Data Science"],
+    webDev: ["React", "Next.js", "Node.js", "HTML", "CSS", "MongoDB"],
+    tools: ["Git", "GitHub"],
+  };
 
-  const skills = [
-    { name: "JavaScript", icon: <FaJs className="text-yellow-400" /> },
-    { name: "React", icon: <FaReact className="text-cyan-400" /> },
-    { name: "Next.js", icon: <SiNextdotjs className="dark:text-white" /> },
-    { name: "Node.js", icon: <FaNodeJs className="text-green-600" /> },
-    { name: "Java", icon: <FaJava className="text-orange-600" /> },
-    { name: "HTML5", icon: <FaHtml5 className="text-orange-500" /> },
-    { name: "CSS3", icon: <FaCss3Alt className="text-blue-500" /> },
-    { name: "Tailwind", icon: <SiTailwindcss className="text-cyan-500" /> },
-    { name: "MySQL", icon: <SiMysql className="text-blue-700" /> },
-    { name: "AI Tools", icon: <SiOpenai className="text-green-500" /> },
-  ];
-
-  const recentProjects = [
+  const experience = [
     {
-      title: "Smart Weather App",
-      desc: "Real-time accuracy with a beautiful UI.",
-      tags: ["JS", "API"],
-      link: "/projects"
+      period: "Apr 2026 — Present",
+      role: "Frontend Developer",
+      company: "DHA Head Office, Karachi",
+      tech: "React · Next.js (App Router) · Production UI",
+      description:
+        "Built, updated, and maintained reusable frontend UI components with React and Next.js (App Router) inside an existing production codebase. Translated design requirements and UI specifications into responsive web interfaces. Reused and improved existing components to cut down duplication.",
     },
     {
-      title: "Personal Portfolio",
-      desc: "Modern Next.js portfolio with dark mode.",
-      tags: ["Next.js", "Tailwind"],
-      link: "/projects"
+      period: "Jul 2026 — Aug 2026",
+      role: "Machine Learning Intern",
+      company: "FlyRank AI",
+      tech: "Python · AI Search · Automation",
+      description:
+        "Joined FlyRank's AI Internship Program, working on automation for how brands appear in classic search and AI-driven search engines. Contributed to organic-growth automation problems.",
     },
     {
-      title: "Twitter Clone",
-      desc: "Social media platform replica.",
-      tags: ["React", "Firebase"],
-      link: "/projects"
-    }
+      period: "Jun 2026 — Jul 2026",
+      role: "Python Developer",
+      company: "Decodelabs, Karachi",
+      tech: "Python · Scripts & Applications",
+      description:
+        "Wrote and debugged Python scripts and applications as part of ongoing internship work. Applied core programming and problem-solving skills in a production team setting.",
+    },
   ];
 
   return (
-    <div className="bg-white dark:bg-gray-950 min-h-screen text-gray-900 dark:text-gray-100 overflow-x-hidden selection:bg-purple-500 selection:text-white">
+    <main className="min-h-screen">
+      {/* 1. Editorial Hero with Interactive Code Snippets & GitHub Matrices */}
+      <section className="pt-16 md:pt-24 pb-16 md:pb-24 border-b border-[var(--border)]">
+        <div className="editorial-container">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+            {/* Left Hero Narrative & Code Studio */}
+            <div className="lg:col-span-7">
+              {/* Identity Tagline */}
+              <div className="inline-flex items-center gap-2 text-xs font-mono text-[var(--muted-foreground)] tracking-wide mb-6 uppercase">
+                <span>AI / ML</span>
+                <span>•</span>
+                <span>Full-Stack</span>
+                <span>•</span>
+                <span>Product Engineering</span>
+              </div>
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-purple-500/20 rounded-full blur-[120px] -z-10 animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-blue-500/10 rounded-full blur-[100px] -z-10"></div>
+              {/* Primary Headline */}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight text-[var(--foreground)] leading-[1.1] mb-6">
+                I build intelligent systems and the products around them.
+              </h1>
 
-        <div className="container mx-auto px-6 text-center">
-          <div className="inline-block px-4 py-1.5 mb-6 border border-purple-200 dark:border-purple-800 rounded-full bg-purple-50 dark:bg-purple-900/10 backdrop-blur-sm">
-            <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              🚀 Available for hire
-            </span>
-          </div>
+              {/* Supporting Copy */}
+              <p className="text-lg md:text-xl text-[var(--muted-foreground)] leading-relaxed max-w-2xl mb-8">
+                AI/ML student and full-stack developer focused on building practical AI
+                systems, machine-learning applications, and modern web products.
+              </p>
 
-          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-            Hi, I'm <span className="text-gray-900 dark:text-white">Muhammad Shayan</span>
-          </h1>
+              {/* Action Buttons & Links */}
+              <div className="flex flex-wrap items-center gap-4 text-sm font-mono mb-8">
+                <Link
+                  href="#work"
+                  className="px-5 py-2.5 rounded bg-[var(--foreground)] text-[var(--background)] font-medium hover:opacity-90 transition-opacity inline-flex items-center gap-2"
+                >
+                  View selected work
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
 
-          <div className="text-2xl md:text-4xl font-bold mb-8 h-12 text-gray-600 dark:text-gray-400">
-            I am a <span ref={el} className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"></span>
-          </div>
+                <Link
+                  href="/contact"
+                  className="px-5 py-2.5 rounded border border-[var(--border)] bg-[var(--card)] text-[var(--foreground)] font-medium hover:bg-[var(--surface-subtle)] transition-colors inline-flex items-center gap-2"
+                >
+                  Get in touch
+                  <Mail className="w-3.5 h-3.5 text-[var(--muted-foreground)]" />
+                </Link>
+              </div>
 
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed mb-10">
-            Passionate about building scalable web applications and exploring the frontiers of Artificial Intelligence.
-            Transforming ideas into seamless digital experiences.
-          </p>
+              {/* Subtle Social Links */}
+              <div className="flex items-center gap-6 text-xs font-mono text-[var(--muted-foreground)] mb-10">
+                <a
+                  href="https://github.com/MUHAMMADSHAYAN593"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[var(--foreground)] transition-colors inline-flex items-center gap-1"
+                >
+                  GitHub
+                  <ArrowUpRight className="w-3 h-3" />
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/muhammad-shayan-akhlaq-b98872283/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[var(--foreground)] transition-colors inline-flex items-center gap-1"
+                >
+                  LinkedIn
+                  <ArrowUpRight className="w-3 h-3" />
+                </a>
+              </div>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Link href="/projects">
-              <Button className="h-12 px-8 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-semibold text-lg shadow-lg hover:shadow-purple-500/25 transition-all w-full sm:w-auto">
-                View My Work <ArrowRight className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-            <Link href="/contact">
-              <Button variant="outline" className="h-12 px-8 rounded-full border-2 border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-900 dark:text-white font-semibold text-lg w-full sm:w-auto">
-                Contact Me <Mail className="ml-2 w-5 h-5" />
-              </Button>
-            </Link>
-          </div>
+              {/* Interactive Code Snippets Terminal Element */}
+              <div>
+                <CodeSnippetBox />
+              </div>
+            </div>
 
-          <div className="mt-12 flex justify-center gap-6">
-            <a href="https://github.com/MUHAMMADSHAYAN593/Muhammad-Shayan" className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-2xl"><FaGithub /></a>
-            <a href="https://www.linkedin.com/in/muhammad-shayan-akhlaq-b98872283/" className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-colors text-2xl"><FaLinkedin /></a>
+            {/* Right Column: Status Card + Dual GitHub Contribution Matrices */}
+            <div className="lg:col-span-5 lg:pt-3 space-y-6">
+              {/* Currently Status Block */}
+              <div className="p-5 rounded-lg border border-[var(--border)] bg-[var(--card)] space-y-5 text-xs font-mono">
+                <div className="flex items-center justify-between pb-3 border-b border-[var(--border)]">
+                  <span className="text-[11px] text-[var(--muted-foreground)] uppercase tracking-wider">
+                    Currently
+                  </span>
+                  <span className="inline-flex items-center gap-1.5 text-emerald-600 dark:text-emerald-400">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                    Active
+                  </span>
+                </div>
+
+                <div>
+                  <span className="text-[10px] text-[var(--muted-foreground)] uppercase tracking-wider block mb-1">
+                    Role
+                  </span>
+                  <p className="font-semibold text-[var(--foreground)]">Frontend Developer</p>
+                  <p className="text-[var(--muted-foreground)]">DHA Head Office, Karachi • Production UI</p>
+                </div>
+
+                <div>
+                  <span className="text-[10px] text-[var(--muted-foreground)] uppercase tracking-wider block mb-1">
+                    Education
+                  </span>
+                  <p className="font-semibold text-[var(--foreground)]">BS in Artificial Intelligence</p>
+                  <p className="text-[var(--muted-foreground)]">DHA Suffa University (2024–Present)</p>
+                </div>
+
+                <div className="pt-2 border-t border-[var(--border)] flex items-center justify-between text-[var(--muted-foreground)]">
+                  <span>Location: Karachi, PK</span>
+                  <span>UTC +5</span>
+                </div>
+              </div>
+
+              {/* GitHub Contribution Matrices Component (Supporting both repos) */}
+              <div>
+                <GitHubActivity />
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* Skills Section */}
-      <section className="py-20 bg-gray-50 dark:bg-gray-900/50">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">Technical Skills</h2>
-            <div className="w-20 h-1 bg-purple-600 mx-auto rounded-full"></div>
+      {/* 2. Selected Work (Centerpiece 01–06) */}
+      <section id="work" className="py-20 md:py-28 border-b border-[var(--border)]">
+        <div className="editorial-container">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 pb-6 border-b border-[var(--border)]">
+            <div>
+              <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-2">
+                Selected Work
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--foreground)]">
+                Featured Projects
+              </h2>
+            </div>
+            <Link
+              href="/projects"
+              className="mt-4 md:mt-0 text-xs font-mono text-[var(--muted-foreground)] hover:text-[var(--foreground)] inline-flex items-center gap-1"
+            >
+              View all 21 projects
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {skills.map((skill, idx) => (
-              <div key={idx} className="group bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col items-center justify-center gap-3 border border-gray-100 dark:border-gray-700 hover:-translate-y-1">
-                <div className="text-4xl transform group-hover:scale-110 transition-transform duration-300">
-                  {skill.icon}
+          <div className="space-y-4">
+            {featuredProjects.map((project, idx) => (
+              <ProjectCard
+                key={project.slug}
+                project={project}
+                index={idx}
+                isFeatured={true}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 3. What I Build / Core Capabilities */}
+      <section className="py-20 md:py-28 border-b border-[var(--border)] bg-[var(--surface-subtle)]">
+        <div className="editorial-container">
+          <div className="max-w-2xl mb-14">
+            <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-2">
+              Capabilities
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--foreground)] mb-4">
+              What I build.
+            </h2>
+            <p className="text-[var(--muted-foreground)] text-sm md:text-base leading-relaxed">
+              Bridging machine-learning pipelines with resilient full-stack architecture to build
+              fast, dependable tools.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6 rounded-lg border border-[var(--border)] bg-[var(--card)]">
+              <span className="text-xs font-mono text-blue-600 dark:text-blue-400 block mb-3">
+                01 / AI & LLM Systems
+              </span>
+              <h3 className="text-lg font-bold text-[var(--foreground)] mb-2">
+                Structured AI Workflows
+              </h3>
+              <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
+                Multi-agent architectures, defensive prompt engineering, Zod schema validation,
+                and local LLM orchestration using Ollama and OpenRouter.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-lg border border-[var(--border)] bg-[var(--card)]">
+              <span className="text-xs font-mono text-blue-600 dark:text-blue-400 block mb-3">
+                02 / Modern Web & Mobile
+              </span>
+              <h3 className="text-lg font-bold text-[var(--foreground)] mb-2">
+                Full-Stack Architecture
+              </h3>
+              <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
+                Production Next.js App Router, React, React Native, Node.js, and Express systems
+                with strict component boundaries and clean data flow.
+              </p>
+            </div>
+
+            <div className="p-6 rounded-lg border border-[var(--border)] bg-[var(--card)]">
+              <span className="text-xs font-mono text-blue-600 dark:text-blue-400 block mb-3">
+                03 / Applied Data Science
+              </span>
+              <h3 className="text-lg font-bold text-[var(--foreground)] mb-2">
+                Predictive ML Models
+              </h3>
+              <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
+                Feature engineering, spatial geodesic mathematics, TF-IDF NLP pipelines,
+                classification ensembles, and interactive Streamlit analytics.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. Experience Timeline */}
+      <section className="py-20 md:py-28 border-b border-[var(--border)]">
+        <div className="editorial-container">
+          <div className="max-w-xl mb-16">
+            <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-2">
+              Background
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--foreground)]">
+              Work Experience
+            </h2>
+          </div>
+
+          <div className="divide-y divide-[var(--border)]">
+            {experience.map((exp, i) => (
+              <div
+                key={i}
+                className="py-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-start"
+              >
+                <div className="md:col-span-3 text-xs font-mono text-[var(--muted-foreground)]">
+                  {exp.period}
                 </div>
-                <span className="font-semibold text-gray-700 dark:text-gray-200">{skill.name}</span>
+                <div className="md:col-span-4">
+                  <h3 className="text-base font-bold text-[var(--foreground)]">
+                    {exp.role}
+                  </h3>
+                  <p className="text-xs font-medium text-[var(--muted-foreground)] mt-0.5">
+                    {exp.company}
+                  </p>
+                  <span className="inline-block mt-2 text-[11px] font-mono text-blue-600 dark:text-blue-400">
+                    {exp.tech}
+                  </span>
+                </div>
+                <div className="md:col-span-5 text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed">
+                  {exp.description}
+                </div>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Featured Projects Preview */}
-      <section className="py-20">
-        <div className="container mx-auto px-6">
-          <div className="flex justify-between items-end mb-12">
+      {/* 5. Technical Stack */}
+      <section className="py-20 md:py-28 border-b border-[var(--border)]">
+        <div className="editorial-container">
+          <div className="max-w-xl mb-16">
+            <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-2">
+              Capabilities
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--foreground)]">
+              Technical Stack
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-2">Featured Projects</h2>
-              <div className="w-20 h-1 bg-purple-600 rounded-full"></div>
+              <span className="text-xs font-mono uppercase tracking-wider text-[var(--foreground)] font-semibold block pb-3 mb-4 border-b border-[var(--border)]">
+                Languages
+              </span>
+              <ul className="space-y-2 text-sm text-[var(--muted-foreground)]">
+                {skills.languages.map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
             </div>
-            <Link href="/projects" className="hidden md:flex items-center text-purple-600 font-semibold hover:underline">
-              View All <ArrowRight className="ml-1 w-4 h-4" />
+
+            <div>
+              <span className="text-xs font-mono uppercase tracking-wider text-[var(--foreground)] font-semibold block pb-3 mb-4 border-b border-[var(--border)]">
+                AI / Machine Learning
+              </span>
+              <ul className="space-y-2 text-sm text-[var(--muted-foreground)]">
+                {skills.aiml.map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <span className="text-xs font-mono uppercase tracking-wider text-[var(--foreground)] font-semibold block pb-3 mb-4 border-b border-[var(--border)]">
+                Web Development
+              </span>
+              <ul className="space-y-2 text-sm text-[var(--muted-foreground)]">
+                {skills.webDev.map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <span className="text-xs font-mono uppercase tracking-wider text-[var(--foreground)] font-semibold block pb-3 mb-4 border-b border-[var(--border)]">
+                Tools
+              </span>
+              <ul className="space-y-2 text-sm text-[var(--muted-foreground)]">
+                {skills.tools.map((item) => (
+                  <li key={item} className="flex items-center gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+                    {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. More Projects Archive Preview */}
+      <section className="py-20 md:py-28 border-b border-[var(--border)] bg-[var(--surface-subtle)]">
+        <div className="editorial-container">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+              <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-2">
+                Archive
+              </span>
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+                Additional Projects
+              </h2>
+            </div>
+            <Link
+              href="/projects"
+              className="mt-3 md:mt-0 text-xs font-mono text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"
+            >
+              Browse entire project archive ({projects.length} projects)
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {recentProjects.map((project, index) => (
-              <Link href={project.link} key={index} className="group block">
-                <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl p-1 border border-gray-100 dark:border-gray-800 hover:border-purple-500/50 transition-colors">
-                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 h-full shadow-lg hover:shadow-2xl transition-all duration-300 group-hover:-translate-y-1">
-                    <div className="mb-4">
-                      <span className="inline-block p-3 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-300 mb-4">
-                        <SiNextdotjs className="bg-transparent" />
-                      </span>
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-purple-600 transition-colors">{project.title}</h3>
-                      <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">{project.desc}</p>
-                    </div>
-                    <div className="flex gap-2">
-                      {project.tags.map(tag => (
-                        <span key={tag} className="text-xs px-2 py-1 bg-gray-100 dark:bg-gray-700 rounded-md text-gray-600 dark:text-gray-300 font-medium">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </Link>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {archivePreview.map((item, idx) => (
+              <ProjectCard key={item.slug} project={item} index={idx} isFeatured={false} />
             ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-8 text-center md:hidden">
-            <Link href="/projects" className="inline-flex items-center text-purple-600 font-semibold hover:underline">
-              View All Projects <ArrowRight className="ml-1 w-4 h-4" />
+      {/* 7. Writing / Technical Journal Preview */}
+      <section className="py-20 md:py-28 border-b border-[var(--border)]">
+        <div className="editorial-container">
+          <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div>
+              <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-2">
+                Writing
+              </span>
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--foreground)]">
+                Technical Journal
+              </h2>
+            </div>
+            <Link
+              href="/blog"
+              className="mt-3 md:mt-0 text-xs font-mono text-[var(--muted-foreground)] hover:text-[var(--foreground)] inline-flex items-center gap-1"
+            >
+              Read all articles
+              <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
+          </div>
+
+          <div className="divide-y divide-[var(--border)]">
+            {recentArticles.map((article) => (
+              <article
+                key={article.slug}
+                className="py-6 flex flex-col md:flex-row md:items-baseline justify-between gap-4 group"
+              >
+                <div className="max-w-2xl">
+                  <h3 className="text-lg md:text-xl font-bold text-[var(--foreground)] group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2">
+                    <Link href={`/blog/${article.slug}`}>
+                      {article.title}
+                    </Link>
+                  </h3>
+                  <p className="text-xs md:text-sm text-[var(--muted-foreground)] line-clamp-2 leading-relaxed">
+                    {article.excerpt}
+                  </p>
+                </div>
+
+                <div className="flex items-center gap-4 text-xs font-mono text-[var(--muted-foreground)] flex-shrink-0">
+                  <span>{article.date}</span>
+                  <span>•</span>
+                  <span>{article.readTime}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. About Preview */}
+      <section className="py-20 border-b border-[var(--border)]">
+        <div className="editorial-container">
+          <div className="max-w-2xl">
+            <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-3">
+              About
+            </span>
+            <p className="text-xl md:text-2xl text-[var(--foreground)] leading-relaxed font-normal mb-6">
+              I’m an AI student and full-stack developer interested in the intersection of
+              machine learning, intelligent systems, and product engineering.
+            </p>
+            <Link
+              href="/about"
+              className="text-xs font-mono font-medium text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1"
+            >
+              More about my background and education
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
         </div>
       </section>
 
+      {/* 9. Minimal Contact CTA */}
+      <section className="py-24">
+        <div className="editorial-container">
+          <div className="max-w-xl">
+            <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-3">
+              Contact
+            </span>
+            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-[var(--foreground)] mb-4">
+              Have an idea worth building? Let’s talk.
+            </h2>
+            <p className="text-sm text-[var(--muted-foreground)] leading-relaxed mb-8">
+              Available for technical roles, AI engineering discussions, and software projects.
+            </p>
+            <div className="flex flex-wrap items-center gap-4 text-xs font-mono">
+              <a
+                href="mailto:muhammadshayanakhlaq@gmail.com"
+                className="px-5 py-2.5 rounded bg-[var(--foreground)] text-[var(--background)] font-medium hover:opacity-90 transition-opacity"
+              >
+                Send an email
+              </a>
+              <a
+                href="https://www.linkedin.com/in/muhammad-shayan-akhlaq-b98872283/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 rounded border border-[var(--border)] text-[var(--foreground)] hover:bg-[var(--surface-subtle)] transition-colors"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://github.com/MUHAMMADSHAYAN593"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 rounded border border-[var(--border)] text-[var(--foreground)] hover:bg-[var(--surface-subtle)] transition-colors"
+              >
+                GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Footer />
-    </div>
+    </main>
   );
 }

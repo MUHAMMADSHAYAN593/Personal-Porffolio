@@ -1,76 +1,75 @@
 import Link from "next/link";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import Footer from "@/components/footer";
 import { blogs } from "@/app/data/blogs";
+import { ArrowUpRight } from "lucide-react";
 
 export const metadata = {
-  title: "Blog - Muhammad Shayan",
-  description: "Read my latest articles on Web Development, AI, and Programming.",
+  title: "Writing | Muhammad Shayan – Technical Journal",
+  description:
+    "Engineering essays, notes, and architectural breakdowns on AI/ML, distributed backends, algorithms, and full-stack systems.",
 };
 
-export default function Blog() {
+export default function BlogPage() {
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 py-16 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white mb-4 tracking-tight">
-            My <span className="text-blue-600 dark:text-blue-400">Blog</span>
+    <main className="min-h-screen pt-12 md:pt-16">
+      <div className="editorial-container">
+        {/* Header */}
+        <div className="max-w-2xl mb-16">
+          <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-2">
+            Journal & Field Notes
+          </span>
+          <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--foreground)] mb-4">
+            Writing
           </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Insights, tutorials, and stories about my journey in tech.
+          <p className="text-sm md:text-base text-[var(--muted-foreground)] leading-relaxed">
+            Technical breakdowns, programming paradigms, and engineering lessons learned while
+            building machine learning models and web systems.
           </p>
         </div>
 
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {/* Articles List */}
+        <div className="divide-y divide-[var(--border)] border-t border-b border-[var(--border)] mb-16">
           {blogs.map((post) => (
-            <article
-              key={post.slug}
-              className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col border border-gray-100 dark:border-gray-700 hover:-translate-y-1"
-            >
-              <div className="p-6 flex-1 flex flex-col">
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {post.tags?.slice(0, 3).map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 text-xs font-semibold bg-blue-50 dark:bg-blue-900/30 text-blue-600 dark:text-blue-300 rounded-full"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+            <article key={post.slug} className="py-8 group">
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 items-baseline">
+                {/* Meta Date & Read Time */}
+                <div className="md:col-span-3 text-xs font-mono text-[var(--muted-foreground)] flex md:flex-col items-center md:items-start gap-2 md:gap-1">
+                  <span>{post.date}</span>
+                  <span className="md:hidden">•</span>
+                  <span>{post.readTime}</span>
                 </div>
 
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 text-left">
-                  <Link href={`/blog/${post.slug}`} className="hover:text-blue-600 transition-colors">
-                    {post.title}
-                  </Link>
-                </h2>
+                {/* Article Content */}
+                <div className="md:col-span-9">
+                  <h2 className="text-xl md:text-2xl font-bold text-[var(--foreground)] group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors mb-2">
+                    <Link href={`/blog/${post.slug}`} className="inline-flex items-center gap-2">
+                      {post.title}
+                      <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-blue-600 dark:text-blue-400" />
+                    </Link>
+                  </h2>
 
-                <p className="text-gray-600 dark:text-gray-300 mb-6 flex-1 line-clamp-3 text-left">
-                  {post.excerpt}
-                </p>
+                  <p className="text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed mb-4">
+                    {post.excerpt}
+                  </p>
 
-                <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 border-t border-gray-100 dark:border-gray-700 pt-4 mt-auto">
-                  <div className="flex items-center gap-4">
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-4 h-4" />
-                      {post.date}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      {post.readTime}
-                    </span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {post.tags?.map((tag) => (
+                      <span
+                        key={tag}
+                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-[var(--surface-subtle)] text-[var(--muted-foreground)] border border-[var(--border)]"
+                      >
+                        {tag}
+                      </span>
+                    ))}
                   </div>
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    className="inline-flex items-center font-medium text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
-                  >
-                    Read <ArrowRight className="ml-1 w-4 h-4" />
-                  </Link>
                 </div>
               </div>
             </article>
           ))}
         </div>
       </div>
-    </div>
+
+      <Footer />
+    </main>
   );
 }
