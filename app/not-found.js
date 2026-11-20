@@ -3,7 +3,7 @@ import { ArrowLeft } from "lucide-react";
 
 export default function NotFound() {
   return (
-    <main className="min-h-[70vh] flex items-center justify-center pt-16 pb-24">
+    <main className="min-h-[70vh] flex items-center justify-center pt-28 pb-24">
       <div className="editorial-container text-center max-w-md">
         <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-2">
           404 Error
