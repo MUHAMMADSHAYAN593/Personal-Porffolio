@@ -1,22 +1,15 @@
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import AmbientBackdrop from "@/components/ambient-backdrop";
+import PointerFollower from "@/components/pointer-follower";
+import { ScrollProgressBar } from "@/components/scroll-effects";
+import { PortfolioUXProvider } from "@/components/portfolio-ux-provider";
 import { ThemeProvider } from "@/components/theme-provider";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
-
 export const metadata = {
-  title: "Muhammad Shayan | AI/ML & Full-Stack Developer",
+  title: "Muhammad Shayan — AI/ML & Full-Stack Engineer",
   description:
-    "AI/ML student and full-stack developer focused on building practical AI systems, machine-learning applications, and modern web products.",
+    "AI/ML student and full-stack developer building structured LLM workflows, multi-agent pipelines, and production web interfaces.",
   keywords: [
     "Muhammad Shayan",
     "AI Developer",
@@ -29,7 +22,7 @@ export const metadata = {
   ],
   authors: [{ name: "Muhammad Shayan" }],
   openGraph: {
-    title: "Muhammad Shayan | AI/ML & Full-Stack Developer",
+    title: "Muhammad Shayan — AI/ML & Full-Stack Engineer",
     description:
       "AI/ML student and full-stack developer building intelligent systems, data products, and modern web experiences.",
     url: "https://shayan.dev",
@@ -44,7 +37,7 @@ export default function RootLayout({ children }) {
     <html lang="en" suppressHydrationWarning>
       <body
         suppressHydrationWarning
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className="antialiased min-h-screen flex flex-col bg-[var(--background)] text-[var(--foreground)]"
       >
         <ThemeProvider
           attribute="class"
@@ -52,8 +45,13 @@ export default function RootLayout({ children }) {
           enableSystem
           disableTransitionOnChange
         >
-          <Navbar />
-          <div className="flex-1">{children}</div>
+          <PortfolioUXProvider>
+            <ScrollProgressBar />
+            <AmbientBackdrop />
+            <PointerFollower />
+            <Navbar />
+            <div className="flex-1 relative z-10">{children}</div>
+          </PortfolioUXProvider>
         </ThemeProvider>
       </body>
     </html>

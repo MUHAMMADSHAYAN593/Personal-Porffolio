@@ -1,51 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import Footer from "@/components/footer";
+import ExperienceTimeline from "@/components/experience-timeline";
+import { CopyAction, Reveal } from "@/components/motion-primitives";
 import { ArrowUpRight, ArrowRight, Award, CheckCircle2, Phone, Mail } from "lucide-react";
 
 export const metadata = {
-  title: "About | Muhammad Shayan – AI/ML & Full-Stack Developer",
+  title: "About | Muhammad Shayan — AI/ML & Full-Stack Engineer",
   description:
     "AI/ML student at DHA Suffa University building multi-agent AI systems and full-stack web applications. Frontend Developer at DHA Head Office.",
 };
 
 export default function AboutPage() {
-  const experiences = [
-    {
-      period: "Apr 2026 — Present",
-      role: "Frontend Developer",
-      organization: "DHA Head Office, Karachi",
-      tech: "React · Next.js (App Router) · Production UI",
-      details: [
-        "Built, updated, and maintained reusable frontend UI components with React and Next.js (App Router) inside an existing production codebase.",
-        "Translated design requirements and UI specifications into responsive, functional web interfaces, keeping layouts consistent across screen sizes.",
-        "Modified and extended existing pages and components, adding frontend features without disrupting the established application structure.",
-        "Identified and resolved frontend UI issues covering layout, responsiveness, component behavior, and styling inconsistencies, reusing and improving existing components to cut down duplication.",
-        "Worked within the team's existing frontend architecture and coding conventions, studying implementation patterns before making changes.",
-      ],
-    },
-    {
-      period: "Jul 2026 — Aug 2026",
-      role: "Machine Learning Intern",
-      organization: "FlyRank AI",
-      tech: "Python · AI Automation · Search",
-      details: [
-        "Joined FlyRank's AI Internship Program, working on automation for how brands appear in classic search and AI-driven search engines.",
-        "Contributed to organic-growth automation problems as part of a small, fast-moving product team.",
-      ],
-    },
-    {
-      period: "Jun 2026 — Jul 2026",
-      role: "Python Developer",
-      organization: "Decodelabs, Karachi",
-      tech: "Python · Scripting & Applications",
-      details: [
-        "Wrote and debugged Python scripts and applications as part of ongoing internship work.",
-        "Applied core programming and problem-solving skills in a production team setting.",
-      ],
-    },
-  ];
-
   const education = [
     {
       degree: "BS in Artificial Intelligence",
@@ -58,7 +24,8 @@ export default function AboutPage() {
       degree: "Intermediate (Pre-Engineering)",
       institution: "Army Public College Saddar",
       period: "Completed",
-      details: "Comprehensive coursework in advanced mathematics, physics, and analytical problem-solving.",
+      details:
+        "Coursework in advanced mathematics, physics, and analytical problem-solving.",
     },
   ];
 
@@ -68,7 +35,7 @@ export default function AboutPage() {
       items: ["Python", "JavaScript", "C++", "Java", "SQL"],
     },
     {
-      category: "AI / Machine Learning",
+      category: "AI & Machine Learning",
       items: ["NumPy", "Pandas", "Scikit-learn", "Data Analysis", "Data Science"],
     },
     {
@@ -76,8 +43,8 @@ export default function AboutPage() {
       items: ["React", "Next.js", "Node.js", "HTML", "CSS", "MongoDB"],
     },
     {
-      category: "Tools",
-      items: ["Git", "GitHub"],
+      category: "Tooling",
+      items: ["Git", "GitHub", "uv", "Streamlit"],
     },
   ];
 
@@ -90,9 +57,9 @@ export default function AboutPage() {
       link: null,
       bullets: [
         "Completed a customer churn analysis simulation for XYZ Analytics, identifying essential client data and outlining a strategic investigation approach.",
-        "Conducted data analysis using Python, including Pandas and NumPy, and used data visualization techniques for trend interpretation.",
+        "Conducted data analysis using Python (Pandas, NumPy) and visualization techniques for trend interpretation.",
         "Built and optimized a random forest model, reaching a 50% recall rate in predicting customer churn.",
-        "Wrote an executive summary for the team, delivering actionable insights for decision-making based on the analysis.",
+        "Delivered an executive summary with actionable recommendations based on the analysis.",
       ],
     },
     {
@@ -126,56 +93,56 @@ export default function AboutPage() {
   ];
 
   return (
-    <main className="min-h-screen pt-12 md:pt-16">
+    <main className="min-h-screen pt-24 md:pt-28">
       <div className="editorial-container">
-        {/* Intro Section */}
+        {/* Intro Dossier */}
         <section className="pb-16 border-b border-[var(--border)]">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
-            {/* Left Narrative */}
             <div className="lg:col-span-8">
-              <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-3">
-                About Muhammad Shayan
-              </span>
-              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-[var(--foreground)] mb-6 leading-tight">
-                AI/ML Student & Full-Stack Developer
+              <div className="hero-enter hero-enter-1 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-[var(--border)] bg-[var(--card)] text-xs font-mono text-[var(--muted-foreground)] mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span>Karachi, Pakistan · UTC +5</span>
+              </div>
+
+              <h1 className="hero-enter hero-enter-2 text-4xl sm:text-5xl font-bold tracking-tight text-[var(--foreground)] mb-6 leading-tight">
+                AI/ML Student &amp; Full-Stack Engineer
               </h1>
 
-              {/* Verified Resume Summary */}
-              <div className="space-y-4 text-base md:text-lg text-[var(--muted-foreground)] leading-relaxed max-w-2xl">
+              <div className="hero-enter hero-enter-3 space-y-4 text-base md:text-lg text-[var(--muted-foreground)] leading-relaxed max-w-2xl">
                 <p>
                   AI/ML student at DHA Suffa University building multi-agent AI systems and
-                  full-stack web applications. Recent work includes a multi-agent research
-                  pipeline in Python that automates literature review and synthesis, and
-                  Presidium, a decision-driven governance simulation with a full grading engine.
+                  full-stack web applications. Recent work includes an autonomous literature
+                  synthesis pipeline in Python and Presidium, a decision-driven governance
+                  simulation with a supervised ML grading engine.
                 </p>
                 <p>
-                  Core stack: React, Next.js, and Node.js on the frontend; Python, NumPy, Pandas,
-                  and Scikit-learn for AI and machine learning. Competitive programmer with a focus
-                  on algorithms and problem-solving. Open to AI/ML and full-stack roles.
+                  Core stack: React, Next.js, and Node.js on the product side; Python, NumPy,
+                  Pandas, and Scikit-learn for AI and machine learning. Competitive programmer
+                  focused on algorithms and practical systems.
                 </p>
               </div>
 
-              {/* Direct Resume Contact Info */}
-              <div className="flex flex-wrap items-center gap-6 mt-8 text-xs font-mono">
+              <div className="hero-enter hero-enter-4 flex flex-wrap items-center gap-4 mt-8 text-xs font-mono">
+                <a
+                  href="mailto:muhammadshayanakhlaq@gmail.com"
+                  className="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors inline-flex items-center gap-1.5"
+                >
+                  <Mail className="w-3.5 h-3.5 text-[var(--muted-foreground)]" />
+                  muhammadshayanakhlaq@gmail.com
+                </a>
+                <CopyAction value="muhammadshayanakhlaq@gmail.com" label="Copy email" />
                 <a
                   href="tel:03149765922"
-                  className="text-[var(--foreground)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-flex items-center gap-1.5"
+                  className="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors inline-flex items-center gap-1.5"
                 >
                   <Phone className="w-3.5 h-3.5 text-[var(--muted-foreground)]" />
                   0314 9765922
                 </a>
                 <a
-                  href="mailto:muhammadshayanakhlaq@gmail.com"
-                  className="text-[var(--foreground)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-flex items-center gap-1.5"
-                >
-                  <Mail className="w-3.5 h-3.5 text-[var(--muted-foreground)]" />
-                  muhammadshayanakhlaq@gmail.com
-                </a>
-                <a
                   href="https://github.com/MUHAMMADSHAYAN593"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[var(--foreground)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-flex items-center gap-1"
+                  className="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors inline-flex items-center gap-1"
                 >
                   GitHub
                   <ArrowUpRight className="w-3 h-3" />
@@ -184,7 +151,7 @@ export default function AboutPage() {
                   href="https://www.linkedin.com/in/muhammad-shayan-akhlaq-b98872283/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-[var(--foreground)] hover:text-blue-600 dark:hover:text-blue-400 transition-colors inline-flex items-center gap-1"
+                  className="text-[var(--foreground)] hover:text-[var(--accent)] transition-colors inline-flex items-center gap-1"
                 >
                   LinkedIn
                   <ArrowUpRight className="w-3 h-3" />
@@ -192,226 +159,177 @@ export default function AboutPage() {
               </div>
             </div>
 
-            {/* Right Profile Image */}
-            <div className="lg:col-span-4">
-              <div className="p-3 rounded-lg border border-[var(--border)] bg-[var(--card)]">
-                <div className="relative aspect-[4/5] w-full rounded overflow-hidden bg-[var(--surface-subtle)]">
+            {/* Profile Photo */}
+            <div className="lg:col-span-4 hero-enter hero-enter-stage">
+              <div className="p-3 rounded-2xl border border-[var(--border)] bg-[var(--card)]">
+                <div className="relative aspect-[4/5] w-full rounded-xl overflow-hidden bg-[var(--surface-subtle)]">
                   <Image
                     src="/images/image1.jpg"
                     alt="Muhammad Shayan"
                     fill
-                    className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                    className="object-cover grayscale hover:grayscale-0 transition-[filter] duration-500"
                     priority
                   />
                 </div>
                 <div className="pt-3 pb-1 text-center font-mono text-xs text-[var(--muted-foreground)]">
-                  Muhammad Shayan • Karachi, Pakistan
+                  Muhammad Shayan — Karachi, PK
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Technical Skills (Categorized exactly as on Resume) */}
+        {/* Technical Skills */}
         <section className="py-16 md:py-20 border-b border-[var(--border)]">
-          <div className="max-w-2xl mb-12">
-            <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-2">
-              Capabilities
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+          <Reveal>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--foreground)] mb-10">
               Technical Skills
             </h2>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {skills.map((grp) => (
-              <div key={grp.category} className="p-5 rounded-lg border border-[var(--border)] bg-[var(--card)]">
-                <span className="text-xs font-mono uppercase tracking-wider text-[var(--foreground)] font-semibold block pb-2 mb-3 border-b border-[var(--border)]">
-                  {grp.category}
-                </span>
-                <ul className="space-y-1.5 text-xs md:text-sm text-[var(--muted-foreground)]">
-                  {grp.items.map((it) => (
-                    <li key={it} className="flex items-center gap-2">
-                      <span className="w-1 h-1 rounded-full bg-blue-500" />
-                      {it}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Experience Timeline (Verbatim from Resume) */}
-        <section className="py-16 md:py-20 border-b border-[var(--border)]">
-          <div className="max-w-2xl mb-12">
-            <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-2">
-              Career
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--foreground)]">
-              Experience
-            </h2>
-          </div>
-
-          <div className="divide-y divide-[var(--border)]">
-            {experiences.map((item, idx) => (
-              <div
-                key={idx}
-                className="py-8 grid grid-cols-1 md:grid-cols-12 gap-6 items-start"
-              >
-                <div className="md:col-span-3 text-xs font-mono text-[var(--muted-foreground)]">
-                  {item.period}
-                </div>
-                <div className="md:col-span-4">
-                  <h3 className="text-base font-bold text-[var(--foreground)]">
-                    {item.role}
-                  </h3>
-                  <p className="text-xs font-medium text-[var(--muted-foreground)] mt-0.5">
-                    {item.organization}
-                  </p>
-                  <span className="inline-block mt-2 text-[11px] font-mono text-blue-600 dark:text-blue-400">
-                    {item.tech}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {skills.map((grp) => (
+                <div
+                  key={grp.category}
+                  className="p-5 rounded-xl border border-[var(--border)] bg-[var(--card)]"
+                >
+                  <span className="text-xs font-mono text-[var(--foreground)] font-semibold block pb-2.5 mb-3 border-b border-[var(--border)]">
+                    {grp.category}
                   </span>
-                </div>
-                <div className="md:col-span-5">
-                  <ul className="space-y-2.5 text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed">
-                    {item.details.map((d, i) => (
-                      <li key={i} className="flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--border)] mt-1.5 flex-shrink-0" />
-                        <span>{d}</span>
+                  <ul className="space-y-1.5 text-xs md:text-sm text-[var(--muted-foreground)]">
+                    {grp.items.map((it) => (
+                      <li key={it} className="flex items-center gap-2">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[var(--accent)]" />
+                        {it}
                       </li>
                     ))}
                   </ul>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          </Reveal>
         </section>
 
-        {/* Education Section */}
+        {/* Experience */}
         <section className="py-16 md:py-20 border-b border-[var(--border)]">
-          <div className="max-w-2xl mb-12">
-            <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-2">
-              Education
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--foreground)]">
+          <Reveal>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--foreground)] mb-10">
+              Experience
+            </h2>
+            <ExperienceTimeline />
+          </Reveal>
+        </section>
+
+        {/* Education */}
+        <section className="py-16 md:py-20 border-b border-[var(--border)]">
+          <Reveal>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--foreground)] mb-10">
               Academic Background
             </h2>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {education.map((edu, i) => (
-              <div
-                key={i}
-                className="p-6 rounded-lg border border-[var(--border)] bg-[var(--card)] flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between text-xs font-mono text-[var(--muted-foreground)] mb-2">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {education.map((edu) => (
+                <div
+                  key={edu.degree}
+                  className="p-6 rounded-xl border border-[var(--border)] bg-[var(--card)]"
+                >
+                  <div className="flex items-center justify-between text-xs font-mono text-[var(--muted-foreground)] mb-2 tabular-nums">
                     <span>{edu.period}</span>
                     <span>Karachi, PK</span>
                   </div>
                   <h3 className="text-lg font-bold text-[var(--foreground)] mb-1">
                     {edu.degree}
                   </h3>
-                  <p className="text-sm font-medium text-blue-600 dark:text-blue-400 mb-3">
+                  <p className="text-sm font-medium text-[var(--accent)] mb-3">
                     {edu.institution}
                   </p>
-                  <p className="text-xs text-[var(--muted-foreground)] leading-relaxed">
+                  <p className="text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed">
                     {edu.details}
                   </p>
                 </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Certifications (Verified Credentials from Resume Page 2) */}
-        <section className="py-16 md:py-20 border-b border-[var(--border)]">
-          <div className="max-w-2xl mb-12">
-            <span className="text-xs font-mono text-[var(--muted-foreground)] uppercase tracking-wider block mb-2">
-              Verification
-            </span>
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--foreground)]">
-              Certifications & Simulations
-            </h2>
-          </div>
-
-          <div className="space-y-6">
-            {/* BCG Forage Simulation Feature Card */}
-            <div className="p-6 rounded-lg border border-[var(--border)] bg-[var(--card)]">
-              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-3">
-                <h3 className="text-lg font-bold text-[var(--foreground)] flex items-center gap-2">
-                  <Award className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                  {certifications[0].title}
-                </h3>
-                <span className="text-xs font-mono text-[var(--muted-foreground)]">
-                  {certifications[0].issuer} • {certifications[0].date}
-                </span>
-              </div>
-              <p className="text-xs font-mono text-[var(--muted-foreground)] mb-4">
-                Credential ID: {certifications[0].credentialId}
-              </p>
-              <ul className="space-y-2 text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed">
-                {certifications[0].bullets.map((b, idx) => (
-                  <li key={idx} className="flex items-start gap-2">
-                    <CheckCircle2 className="w-3.5 h-3.5 text-blue-500 mt-0.5 flex-shrink-0" />
-                    <span>{b}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Other Verified Certificates Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {certifications.slice(1).map((cert, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 rounded-lg border border-[var(--border)] bg-[var(--card)] flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between text-xs font-mono text-[var(--muted-foreground)] mb-1">
-                      <span>{cert.issuer}</span>
-                      <span>{cert.date}</span>
-                    </div>
-                    <h4 className="text-sm font-bold text-[var(--foreground)] mb-1">
-                      {cert.title}
-                    </h4>
-                    <p className="text-[11px] font-mono text-[var(--muted-foreground)] break-all mb-3">
-                      ID: {cert.credentialId}
-                    </p>
-                  </div>
-                  {cert.link && (
-                    <a
-                      href={cert.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-mono text-blue-600 dark:text-blue-400 hover:underline inline-flex items-center gap-1 self-start"
-                    >
-                      Verify Certificate
-                      <ArrowUpRight className="w-3 h-3" />
-                    </a>
-                  )}
-                </div>
               ))}
             </div>
-          </div>
+          </Reveal>
+        </section>
+
+        {/* Certifications */}
+        <section className="py-16 md:py-20 border-b border-[var(--border)]">
+          <Reveal>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-[var(--foreground)] mb-10">
+              Certifications &amp; Simulations
+            </h2>
+            <div className="space-y-6">
+              <div className="p-6 rounded-xl border border-[var(--border)] bg-[var(--card)]">
+                <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-2 mb-3">
+                  <h3 className="text-lg font-bold text-[var(--foreground)] flex items-center gap-2">
+                    <Award className="w-4 h-4 text-[var(--accent)]" />
+                    {certifications[0].title}
+                  </h3>
+                  <span className="text-xs font-mono text-[var(--muted-foreground)] tabular-nums">
+                    {certifications[0].issuer} · {certifications[0].date}
+                  </span>
+                </div>
+                <p className="text-xs font-mono text-[var(--muted-foreground)] mb-4">
+                  Credential ID: {certifications[0].credentialId}
+                </p>
+                <ul className="space-y-2 text-xs md:text-sm text-[var(--muted-foreground)] leading-relaxed">
+                  {certifications[0].bullets.map((b, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5 text-[var(--accent)] mt-0.5 flex-shrink-0" />
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {certifications.slice(1).map((cert) => (
+                  <div
+                    key={cert.title}
+                    className="p-5 rounded-xl border border-[var(--border)] bg-[var(--card)] flex flex-col justify-between"
+                  >
+                    <div>
+                      <div className="flex items-center justify-between text-xs font-mono text-[var(--muted-foreground)] mb-1.5 tabular-nums">
+                        <span>{cert.issuer}</span>
+                        <span>{cert.date}</span>
+                      </div>
+                      <h4 className="text-sm font-bold text-[var(--foreground)] mb-1">
+                        {cert.title}
+                      </h4>
+                      <p className="text-[11px] font-mono text-[var(--muted-foreground)] break-all mb-3">
+                        ID: {cert.credentialId}
+                      </p>
+                    </div>
+                    {cert.link && (
+                      <a
+                        href={cert.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-xs font-mono text-[var(--accent)] hover:underline inline-flex items-center gap-1 self-start"
+                      >
+                        Verify certificate
+                        <ArrowUpRight className="w-3 h-3" />
+                      </a>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </Reveal>
         </section>
 
         {/* CTA */}
         <section className="py-16 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div>
             <h3 className="text-xl font-bold text-[var(--foreground)] mb-1">
-              Interested in seeing what I&apos;ve engineered?
+              Explore the interactive case studies
             </h3>
             <p className="text-xs md:text-sm text-[var(--muted-foreground)]">
-              Explore in-depth technical case studies across my primary projects.
+              Inspect architecture diagrams, live deployments, and product demos across 21 projects.
             </p>
           </div>
           <Link
             href="/projects"
-            className="px-5 py-2.5 rounded bg-[var(--foreground)] text-[var(--background)] text-xs font-mono font-medium hover:opacity-90 transition-opacity inline-flex items-center gap-1.5"
+            className="px-5 py-2.5 rounded-lg bg-[var(--foreground)] text-[var(--background)] text-xs font-mono font-medium hover:opacity-90 transition-opacity inline-flex items-center gap-1.5"
           >
-            Explore Projects
+            Browse projects
             <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </section>

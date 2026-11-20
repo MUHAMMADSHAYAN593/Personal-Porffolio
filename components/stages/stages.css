@@ -1,0 +1,715 @@
+/* Scoped Styles for Portfolio Stageshow Demos
+   Unlayered so rules win over @layer stageshow cleanly.
+   Every demo scopes its classes under its root class. */
+
+/* ==========================================================================
+   1. Hero Showcase (.sh-hero)
+   ========================================================================== */
+
+.sh-hero .ss-stage {
+  --gutter: 24px;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--ss-well);
+}
+
+.sh-hero .ss-stage[data-layout="compact"] {
+  --gutter: 14px;
+}
+
+.sh-hero-win {
+  position: absolute;
+  top: var(--gutter);
+  left: var(--gutter);
+  width: 724px;
+  height: 448px;
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.sh-hero .ss-stage[data-layout="compact"] .sh-hero-win {
+  width: 382px;
+  height: 420px;
+}
+
+.sh-hero-side {
+  display: grid;
+  align-content: start;
+  gap: 4px;
+  padding: 12px 10px;
+}
+
+.sh-hero-side__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px 8px 10px;
+}
+
+.sh-hero-side__name {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ss-text-strong);
+}
+
+.sh-hero-side__item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  padding: 0 8px;
+  border-radius: var(--ss-radius-sm);
+  font-size: 11.5px;
+  color: var(--ss-text);
+}
+
+.sh-hero-side__item[data-active] {
+  background: var(--ss-ink-2);
+  color: var(--ss-text-strong);
+  font-weight: 500;
+}
+
+.sh-hero-main {
+  padding: 16px 86px 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sh-hero .ss-stage[data-layout="compact"] .sh-hero-main {
+  padding: 14px 44px 20px 14px;
+  gap: 10px;
+}
+
+.sh-hero-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.sh-hero-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ss-text-strong);
+  letter-spacing: -0.01em;
+}
+
+.sh-hero-sub {
+  font-size: 11px;
+  color: var(--ss-text-faint);
+  margin-top: 2px;
+}
+
+.sh-hero-dossier {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--ss-radius-md);
+  border: 1px solid var(--ss-line);
+  background: var(--ss-surface);
+  overflow: hidden;
+}
+
+.sh-hero-score-wrap {
+  display: flex;
+  align-items: baseline;
+  gap: 3px;
+  font-variant-numeric: tabular-nums;
+}
+
+.sh-hero-score {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--ss-text-strong);
+  letter-spacing: -0.02em;
+}
+
+.sh-hero-score-max {
+  font-size: 11px;
+  color: var(--ss-text-faint);
+  font-family: var(--ss-mono);
+}
+
+.sh-hero-gap-row {
+  border-top: 1px solid var(--ss-line-faint);
+}
+
+.sh-hero-filler-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Terminal Satellite straddling left sidebar / bottom-left */
+.sh-hero-term {
+  position: absolute;
+  left: 14px;
+  bottom: 18px;
+  width: 244px;
+  height: 150px;
+  box-shadow: var(--ss-shadow-satellite);
+  z-index: 20;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease;
+}
+
+.sh-hero .ss-stage[data-layout="compact"] .sh-hero-term {
+  left: 14px;
+  right: 14px;
+  width: auto;
+  bottom: 14px;
+  height: 116px;
+}
+
+.sh-hero-term__body {
+  padding: 10px 12px;
+  font-size: 10.5px;
+  line-height: 1.55;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sh-hero-term__line {
+  opacity: 0;
+  transform: translateY(3px);
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.sh-hero-term__line[data-on="true"] {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Research Agent Hero Tab */
+.sh-res-body {
+  padding: 16px 32px 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+}
+
+.sh-hero .ss-stage[data-layout="compact"] .sh-res-body {
+  padding: 14px 16px 20px;
+}
+
+.sh-res-prompt-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.sh-res-graph {
+  position: relative;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 44px;
+  align-items: center;
+  padding: 8px 0;
+}
+
+.sh-hero .ss-stage[data-layout="compact"] .sh-res-graph {
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.sh-res-agents {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sh-res-node {
+  padding: 7px 10px;
+  border-radius: var(--ss-radius-sm);
+  border: 1px solid var(--ss-line);
+  background: var(--ss-surface);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ss-text);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: border-color 0.25s ease, color 0.25s ease, background 0.25s ease;
+}
+
+.sh-res-node[data-active="true"] {
+  border-color: var(--ss-accent);
+  color: var(--ss-text-strong);
+  background: var(--ss-accent-soft);
+}
+
+.sh-res-output {
+  padding: 12px 14px;
+  border-radius: var(--ss-radius-md);
+  border: 1px solid var(--ss-line);
+  background: var(--ss-surface);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 126px;
+}
+
+.sh-res-output__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--ss-text-strong);
+}
+
+.sh-res-stream {
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--ss-text);
+}
+
+/* Architecture Visualizer Hero Tab */
+.sh-arch-body {
+  padding: 16px 32px 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height: 100%;
+}
+
+.sh-hero .ss-stage[data-layout="compact"] .sh-arch-body {
+  padding: 14px 16px 20px;
+}
+
+.sh-arch-canvas {
+  position: relative;
+  flex: 1;
+  min-height: 204px;
+  border-radius: var(--ss-radius-md);
+  border: 1px solid var(--ss-line);
+  background: var(--ss-canvas);
+  overflow: hidden;
+  background-image: radial-gradient(var(--ss-line) 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+.sh-arch-node {
+  position: absolute;
+  width: 126px;
+  padding: 9px 11px;
+  border-radius: var(--ss-radius-md);
+  border: 1px solid var(--ss-line);
+  background: var(--ss-surface);
+  box-shadow: var(--ss-shadow-card);
+  transition: border-color 0.28s ease, box-shadow 0.28s ease, transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sh-arch-node[data-lit="true"] {
+  border-color: var(--ss-accent);
+  box-shadow: 0 0 0 2px var(--ss-accent-soft), var(--ss-shadow-card);
+  transform: translateY(-1px);
+}
+
+.sh-arch-node__tag {
+  font-size: 9.5px;
+  font-family: var(--ss-mono);
+  color: var(--ss-text-faint);
+  margin-bottom: 3px;
+}
+
+.sh-arch-node__name {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: var(--ss-text-strong);
+}
+
+/* ==========================================================================
+   2. Capabilities Bento (.sh-bento)
+   ========================================================================== */
+
+.sh-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+@media (max-width: 960px) {
+  .sh-bento-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 620px) {
+  .sh-bento-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.sh-tile {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  overflow: hidden;
+  min-height: 310px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sh-tile:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 10px 30px -12px rgba(15, 23, 42, 0.12);
+  transform: translateY(-2px);
+}
+
+.dark .sh-tile:hover {
+  box-shadow: 0 12px 32px -12px rgba(0, 0, 0, 0.55);
+}
+
+.sh-tile--hero {
+  grid-column: span 2;
+}
+
+@media (max-width: 620px) {
+  .sh-tile--hero {
+    grid-column: span 1;
+  }
+}
+
+.sh-tile--stat {
+  background: #111113;
+  color: #fafafa;
+  border-color: rgba(255, 255, 255, 0.1);
+  padding: 26px;
+  justify-content: space-between;
+}
+
+.dark .sh-tile--stat {
+  background: #18181c;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+.sh-tile__copy {
+  padding: 22px 24px 12px;
+  font-size: 16px;
+  line-height: 1.45;
+  color: var(--muted-foreground);
+  letter-spacing: -0.01em;
+}
+
+.sh-tile__copy b,
+.sh-tile__copy strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.sh-tile__picture {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+/* Tile 1: Hero Window inside bento (only window in the grid) */
+.sh-bt-hero .ss-stage {
+  background: transparent;
+}
+
+.sh-bt-win {
+  position: absolute;
+  left: 24px;
+  top: 8px;
+  right: -24px;
+  bottom: -20px;
+  box-shadow: var(--ss-shadow-window);
+}
+
+.sh-bt-win-body {
+  padding: 14px 48px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sh-bt-flow {
+  position: relative;
+  display: grid;
+  grid-template-columns: 112px 1fr;
+  gap: 44px;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.sh-bt-workers {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.sh-bt-worker {
+  padding: 6px 10px;
+  border-radius: var(--ss-radius-sm);
+  border: 1px solid var(--ss-line);
+  background: var(--ss-surface);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--ss-text-strong);
+}
+
+.sh-bt-synth {
+  padding: 10px 12px;
+  border-radius: var(--ss-radius-md);
+  border: 1px solid var(--ss-line);
+  background: var(--ss-surface);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Tile 2: Display Stat (page typography, zero UI chrome) */
+.sh-stat-lead {
+  font-size: 13px;
+  font-family: var(--font-mono-stack);
+  color: #93c5fd;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.sh-stat-number {
+  font-size: clamp(48px, 6vw, 68px);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1;
+  color: #ffffff;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.sh-stat-unit {
+  font-size: 0.55em;
+  font-weight: 600;
+  color: #93c5fd;
+  margin-left: 2px;
+}
+
+.sh-stat-label {
+  font-size: 14px;
+  line-height: 1.45;
+  color: #cbd5e1;
+}
+
+/* Tile 3: Component (Zoomed Card, no window) */
+.sh-bt-comp .ss-stage {
+  background: transparent;
+}
+
+.sh-bt-zod-card {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: -10px;
+  border-radius: 12px 12px 0 0;
+  border: 1px solid var(--ss-line);
+  border-bottom: none;
+  background: var(--ss-canvas);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-shadow: var(--ss-shadow-card);
+}
+
+.sh-bt-zod-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sh-bt-zod-title {
+  font-size: 11.5px;
+  font-weight: 600;
+  font-family: var(--ss-mono);
+  color: var(--ss-text-strong);
+}
+
+/* Tile 4: Diagram (CineMatch Sparse Latency, no window) */
+.sh-bt-diag .ss-stage {
+  background: transparent;
+}
+
+.sh-bt-diag-box {
+  position: absolute;
+  left: 24px;
+  right: 24px;
+  bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sh-bt-diag-top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.sh-bt-diag-val {
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: var(--ss-text-strong);
+  font-variant-numeric: tabular-nums;
+}
+
+.sh-bt-diag-sub {
+  font-size: 11px;
+  font-family: var(--ss-mono);
+  color: var(--ss-text-faint);
+}
+
+/* Tile 5: Collection (Stack chips bleeding off both sides) */
+.sh-bt-coll .ss-stage {
+  background: transparent;
+}
+
+.sh-bt-rows {
+  position: absolute;
+  inset: 14px 0 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+
+.sh-bt-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  transform: translateX(var(--off, 0px));
+  transition: transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.sh-bt-rows[data-on="true"] .sh-bt-row {
+  transform: translateX(calc(var(--off, 0px) + var(--dir, 1) * 28px));
+}
+
+.sh-bt-chip {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 12px;
+  border-radius: 999px;
+  border: 1px solid var(--ss-line);
+  background: var(--ss-canvas);
+  font-size: 12px;
+  font-family: var(--ss-mono);
+  color: var(--ss-text-strong);
+  flex: none;
+}
+
+/* ==========================================================================
+   3. Featured & Case-Study Project Stages (.sh-proj)
+   ========================================================================== */
+
+.sh-proj-frame {
+  position: relative;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--surface-well);
+}
+
+.sh-proj .ss-stage {
+  --gutter: 20px;
+  overflow: hidden;
+  background: var(--ss-well);
+}
+
+.sh-proj .ss-stage[data-layout="compact"] {
+  --gutter: 14px;
+}
+
+.sh-proj-win {
+  position: absolute;
+  top: var(--gutter);
+  left: var(--gutter);
+  width: 596px;
+  height: 346px;
+  box-shadow: var(--ss-shadow-hero);
+}
+
+.sh-proj .ss-stage[data-layout="compact"] .sh-proj-win {
+  width: 364px;
+  height: 296px;
+}
+
+.sh-proj-body {
+  padding: 14px 66px 20px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sh-proj .ss-stage[data-layout="compact"] .sh-proj-body {
+  padding: 12px 44px 16px 14px;
+}
+
+.sh-proj-sat {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 214px;
+  box-shadow: var(--ss-shadow-satellite);
+  z-index: 20;
+}
+
+.sh-proj .ss-stage[data-layout="compact"] .sh-proj-sat {
+  display: none;
+}
+
+.sh-proj-replay {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 30;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--muted-foreground);
+  font-size: 11px;
+  font-family: var(--font-mono-stack);
+  opacity: 0.85;
+  transition: opacity 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.sh-proj-replay:hover {
+  opacity: 1;
+  color: var(--foreground);
+  border-color: var(--border-strong);
+}
+
+/* Mobile phone stage centering for React Native projects */
+.sh-proj-phone-wrap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  padding-top: 22px;
+}
+
+.sh-proj-phone-screen {
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background: var(--ss-surface);
+  height: 100%;
+}
